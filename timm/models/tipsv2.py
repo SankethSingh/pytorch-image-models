@@ -741,13 +741,15 @@ def init_weights_vit_timm(module: nn.Module, name: str = ""):  # pylint: disable
 # ── Pretrained configs ────────────────────────────────────────────────────────
 default_cfgs = {
     "tipsv2_b14": dict(
-        # hf_hub_id="SankethSingh/tipsv2_b14_timm",
+        hf_hub_id="SankethSingh/tipsv2_b14_timm",
+        hf_hub_filename="tipsv2_b14_timm.pth",
         input_size=(3, 448, 448),
         mean=(0.0, 0.0, 0.0),
         std=(1.0, 1.0, 1.0),
     ),
     "tipsv2_l14": dict(
-        # hf_hub_id="SankethSingh/tipsv2_l14_timm",
+        hf_hub_id="SankethSingh/tipsv2_l14_timm",
+        hf_hub_filename="tipsv2_l14_timm.pth",
         input_size=(3, 448, 448),
         mean=(0.0, 0.0, 0.0),
         std=(1.0, 1.0, 1.0),
@@ -770,10 +772,11 @@ def tipsv2_b14(pretrained=False, **kwargs):
         mlp_ratio=4.0,
         qkv_bias=True,
         num_register_tokens=1,
-        ffn_layer="swiglu",
+        ffn_layer="mlp",
         interpolate_antialias=True,
         interpolate_offset=0.0,
         init_values=1e-5,
+        block_chunks=0,
     )
     model_args.update(kwargs)
 
@@ -799,10 +802,11 @@ def tipsv2_l14(pretrained=False, **kwargs):
         mlp_ratio=4.0,
         qkv_bias=True,
         num_register_tokens=1,
-        ffn_layer="swiglu",
+        ffn_layer="mlp",
         interpolate_antialias=True,
         interpolate_offset=0.0,
         init_values=1e-5,
+        block_chunks=0,
     )
     model_args.update(kwargs)
 

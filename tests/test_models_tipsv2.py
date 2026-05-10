@@ -24,3 +24,21 @@ def test_tipsv2_l14_forward_shapes():
     assert regs.shape == (1, 1, 1024)
     assert patches.shape[0] == 1
     assert patches.shape[-1] == 1024
+
+def test_tipsv2_b14_pretrained_forward():
+    model = timm.create_model("tipsv2_b14", pretrained=True)
+    model.eval()
+    x = torch.rand(1, 3, 448, 448)
+    with torch.no_grad():
+        cls, regs, patches = model(x)
+    assert cls.shape == (1, 1, 768)
+    assert patches.shape == (1, 1024, 768)
+
+def test_tipsv2_l14_pretrained_forward():
+    model = timm.create_model("tipsv2_l14", pretrained=True)
+    model.eval()
+    x = torch.rand(1, 3, 448, 448)
+    with torch.no_grad():
+        cls, regs, patches = model(x)
+    assert cls.shape == (1, 1, 1024)
+    assert patches.shape == (1, 1024, 1024)
